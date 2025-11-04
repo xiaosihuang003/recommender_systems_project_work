@@ -100,10 +100,10 @@ jupyter notebook notebooks/PartI_(final).ipynb
 ### Method Comparison
 
 | Method | Movie 1230 | Movie 1276 | Philosophy |
-|--------|-----------|-----------|-----------|
-| Average | 4.75 | 4.38 | Democracy |
-| Least Misery | 4.50 | 3.76 | Protection |
-| Balancing | 4.70 | 4.26 | Consensus |
+|--------|-----------|-----------|
+| Average | 4.75 | 4.38 |
+| Least Misery | 4.50 | 3.76 | 
+| Balancing | 4.70 | 4.26 | 
 
 ---
 
