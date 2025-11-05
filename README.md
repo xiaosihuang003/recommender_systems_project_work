@@ -4,7 +4,7 @@
 This project implements user-based collaborative filtering and group recommendation strategies using the MovieLens 100K dataset.
 
 **Students:** Oskari Perikangas, Xiaosi Huang  
-**Course:** DATA.ML.360-2025-2026  
+**Course:** DATA.ML.360-2025-2026-1 Recommender Systems  
 **Date:** November 4, 2025
 
 ---
