@@ -1,11 +1,14 @@
-# Recommender Systems Project Work (Part I, Part II, Part III, Part IV)
+# Recommender Systems Project Work
+*(Part I, Part II, Part III, Part IV)*
 
 **Students:** Oskari Perikangas, Xiaosi Huang  
 **Course:** DATA.ML.360-2025-2026-1 Recommender Systems  
-**Date:** November 04, 2025 (Part I)
-**Date:** November 10, 2025 (Part II)
-**Date:** November xx, 2025 (Part III)
-**Date:** November xx, 2025 (Part IV)
+
+**Project Timeline:**  
+- **Part I:** November 04, 2025  
+- **Part II:** November 10, 2025  
+- **Part III:** November xx, 2025  
+- **Part IV:** November xx, 2025  
 
 ## How to Run the Code
 
