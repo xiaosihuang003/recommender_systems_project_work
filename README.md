@@ -143,10 +143,8 @@ Part II implements and compares three sequential group recommendation methods fr
 | **SDAA**        | **0.791**         | **0.344**         | **0.736**         |
 
 **Summary:**
-- SDAA maintains same satisfaction as Average
-- SDAA reduces disagreement by 1.7%
-- SDAA achieves 1.8% higher reward
-- SDAA maintains highest reward across all rounds
+- SDAA maintains same satisfaction as Average and reduces disagreement by 1.7%
+- SDAA achieves 1.8% higher reward and maintains highest reward across all rounds.
 
 ## References
 
