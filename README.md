@@ -153,8 +153,51 @@ Part II implements and compares three sequential group recommendation methods fr
 
 ---
 ## Part III:
+---
 
-updating...
+## Part III: Diverse Sequential Group Recommendations with DiGSFO
+
+Part III adds diversity control to sequential group recommendations, preventing filter bubbles while maintaining fairness.
+
+## Implementation Details
+
+### Method: DiGSFO (ADAPT Framework)
+
+**Source:** Emilia Lenzi's Lecture, pages 30-32
+
+**Key Idea:**
+- Round 1: Average aggregation
+- Round 2+: Filter by genre distance → Score by weighted fairness → Select best list
+
+**Parameters:**
+- δ=0.5 (distance threshold)
+- s=100 (top items per user)
+- t=50 (candidate lists)
+- k=5 (movies per round)
+
+### Testing & Results
+
+**Setup:**
+- Test Group: Users [1, 414, 599]
+- Rounds: 10 sequential rounds
+- Recommendations: 5 movies per round
+
+| Delta | Group Satisfaction | Group Disagreement | Avg Diversity |
+|-------|-------------------|-------------------|---------------|
+| 0.0   | 0.806             | 0.337             | 0.785         |
+| **0.5** | **0.806**       | **0.337**         | **0.801**     |
+| 0.8   | 0.796             | 0.344             | 0.960         |
+
+**Summary:**
+- DiGSFO improves diversity by 2% (0.785 → 0.801) while maintaining high satisfaction (0.806)
+- Weighted fairness keeps disagreement stable at 0.337
+- Best balance achieved with δ=0.5
+
+## References
+
+- **Lenzi, E., et al.** ADAPT: Fairness and Diversity in Sequential Group Recommendations
+- **MovieLens Dataset:** https://grouplens.org/datasets/movielens/
+
 
 ---
 ## Part IV:
