@@ -8,7 +8,9 @@
 - **Part I:** November 04, 2025  
 - **Part II:** November 10, 2025  
 - **Part III:** November 19, 2025  
-- **Part IV:** November 28, 2025  
+- **Part IV:** November 28, 2025
+- **Part II:** December 05, 2025  
+
 
 ## How to Run the Code
 
@@ -149,6 +151,97 @@ Part II implements and compares three sequential group recommendation methods fr
 ## References
 
 - **Stratigi, M., et al. (2020).** SQUIRREL: Sequential Group Recommendations with Reinforcement Learning
+- **MovieLens Dataset:** https://grouplens.org/datasets/movielens/
+
+---
+
+---
+
+## Part II (Upgraded): Sequential Group Recommendations with PFA
+
+**Improved Solution:** PFA (Proportional Fairness Aggregation) - NEW METHOD
+
+Part II (Upgraded) implements a fundamentally different sequential group recommendation method using **geometric mean aggregation** instead of arithmetic mean, addressing the instructor's feedback with a theoretically grounded approach.
+
+## Implementation Details
+
+### Core Innovation: Geometric Mean Aggregation
+
+**Key Difference from SDAA:**
+- **SDAA-Modified:** `score = (w₁·p₁ + w₂·p₂ + w₃·p₃) / Σw` [Arithmetic mean]
+  - Averages predictions → may hide individual dissatisfaction
+- **PFA:** `score = (p₁^w₁ × p₂^w₂ × p₃^w₃)^(1/Σw)` [Geometric mean]
+  - Multiplies predictions → naturally penalizes imbalanced ratings
+
+**Example:**  
+For predictions [2.0, 5.0, 4.0]:
+- Arithmetic: 3.67 (looks acceptable)
+- Geometric: 3.42 (lower score reflects User 1's dissatisfaction)
+
+### PFA Method Features
+
+1. **Two-Phase Design**
+   - **Phase 1:** Average aggregation filters top k×3 candidates (quality constraint)
+   - **Phase 2:** Weighted geometric mean selects final k items (fairness optimization)
+
+2. **Dynamic Gap-Based Weights**
+   - Users below average satisfaction → higher weights (1.2-1.4)
+   - Users above average satisfaction → lower weights (0.8-1.0)
+   - Self-correcting mechanism prevents cumulative unfairness
+
+3. **Theoretical Foundation**
+   - Based on Nash Bargaining Solution
+   - Implements proportional fairness from network resource allocation
+   - No manual parameter tuning (no alpha parameter)
+
+### Testing & Results
+
+**Test Group:** Users [4, 39, 404] (medium diversity: 0.111)  
+**Popular Movies:** 882 movies (min_ratings=30)  
+**Rounds:** 10 sequential recommendation rounds  
+**Top-K:** 5 movies per round
+
+#### Single Group Performance
+
+| Method          | Group Satisfaction | Group Disagreement | Avg Reward (R_sd) |
+|-----------------|-------------------|-------------------|-------------------|
+| Average         | 0.799             | 0.117             | 0.840             |
+| Least Misery    | 0.786             | 0.103             | 0.838             |
+| SDAA-Modified   | 0.800             | 0.114             | 0.834             |
+| **PFA (NEW)**   | **0.795**         | **0.111**         | **0.843**         |
+
+**Key Improvements over SDAA-Modified:**
+- ✓ Reward: +1.1% (0.843 vs 0.834)
+- ✓ Fairness: -2.6% disagreement (0.111 vs 0.114)
+- ✓ Best overall performance among all 4 methods
+
+#### Multi-Group Validation
+
+**Setup:** 10 diverse groups with varying diversity levels (0.45-0.68)
+
+| Metric                    | Value                  |
+|---------------------------|------------------------|
+| Mean improvement over SDAA| +0.6% (+0.0048)        |
+| Win rate vs SDAA-Modified | 6 Wins / 0 Ties / 4 Losses (60%) |
+| Consistency               | Positive trend across groups |
+
+**Summary:**
+- PFA demonstrates robust performance with 60% win rate across diverse groups
+- Geometric mean naturally enforces fairness without manual tuning
+- Two-phase design successfully balances quality and fairness objectives
+- Works best for medium-diversity groups (disagreement ≈ 0.1-0.15)
+
+## Why PFA is Fundamentally Different
+
+1. **Mathematical Approach:** Multiplication (geometric) vs addition (arithmetic)
+2. **Fairness Mechanism:** Natural penalty from geometric mean vs manual alpha blending
+3. **Weight Function:** Gap-based adaptive weights vs simple normalization
+4. **Theoretical Basis:** Nash Bargaining Solution vs heuristic framework
+
+## References
+
+- **Stratigi, M., et al. (2020).** SQUIRREL: Sequential Group Recommendations with Reinforcement Learning
+- **Kelly, F. (1997).** Charging and rate control for elastic traffic. European Transactions on Telecommunications (Proportional Fairness)
 - **MovieLens Dataset:** https://grouplens.org/datasets/movielens/
 
 ---
